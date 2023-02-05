@@ -10,8 +10,8 @@ import { Exclude } from "class-transformer";
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn("uuid")
+  readonly id: string;
 
   @Column()
   name: string;
@@ -24,7 +24,7 @@ export class User {
 
   @Column()
   @Exclude()
-  number: string;
+  phoneNumber: string;
 
   @CreateDateColumn()
   createdAt: Date;

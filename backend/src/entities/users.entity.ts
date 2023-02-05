@@ -1,17 +1,17 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
   Column,
+  PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
 } from "typeorm";
 import { Exclude } from "class-transformer";
 
-@Entity()
+@Entity("user")
 export class User {
   @PrimaryGeneratedColumn("uuid")
-  readonly id: string;
+  id: string;
 
   @Column()
   name: string;
@@ -20,10 +20,10 @@ export class User {
   email: string;
 
   @Column()
-  password: number;
+  @Exclude()
+  password: string;
 
   @Column()
-  @Exclude()
   phoneNumber: string;
 
   @CreateDateColumn()

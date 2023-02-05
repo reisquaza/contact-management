@@ -28,7 +28,7 @@ const createUserService = async ({
   const newUser = userRepository.create({
     name,
     email,
-    password,
+    password: hashedPassword,
     phoneNumber,
   });
 

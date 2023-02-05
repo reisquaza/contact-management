@@ -32,6 +32,6 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @DeleteDateColumn()
-  deletedAt: Date;
+  @Column({ default: true })
+  isActive: boolean;
 }

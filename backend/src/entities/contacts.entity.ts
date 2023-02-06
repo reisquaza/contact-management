@@ -1,7 +1,15 @@
-import { PrimaryGeneratedColumn, Column, CreateDateColumn, Entity } from "typeorm";
+import {
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  JoinTable,
+} from "typeorm";
+import { User } from "./users.entity";
 
 @Entity()
-export class Contacts {
+export class Contact {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -16,4 +24,7 @@ export class Contacts {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @ManyToOne((type) => User)
+  user: User;
 }

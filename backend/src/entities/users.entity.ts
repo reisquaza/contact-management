@@ -4,9 +4,10 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  DeleteDateColumn,
+  OneToMany,
 } from "typeorm";
 import { Exclude } from "class-transformer";
+import { Contact } from "./contacts.entity";
 
 @Entity("user")
 export class User {
@@ -34,4 +35,7 @@ export class User {
 
   @Column({ default: true })
   isActive: boolean;
+
+  @OneToMany((type) => Contact, (contact) => contact.user, { eager: true })
+  contacts: Contact[];
 }

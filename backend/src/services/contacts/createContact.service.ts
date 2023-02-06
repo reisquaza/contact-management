@@ -1,26 +1,31 @@
 import AppDataSource from "../../data-source";
-import { Contacts } from "../../entities/contacts.entity";
+import { Contact } from "../../entities/contacts.entity";
 import { User } from "../../entities/users.entity";
 import { AppError } from "../../errors/appError";
 import { iContactRequest } from "../../interfaces/contacts.interface";
 
-const createContactService = async ({ email }: iContactRequest) => {
-  const contactRepository = AppDataSource.getRepository(Contacts);
+const createContactService = async ({ email, userId }: iContactRequest) => {
+  const contactRepository = AppDataSource.getRepository(Contact);
   const userRepository = AppDataSource.getRepository(User);
 
-  const user = await userRepository.findOneBy({ email });
+  const contact = await userRepository.findOneBy({ email });
+  const user = await userRepository.findOneBy({ id: userId });
+
+  if (!contact) {
+    throw new AppError(400, "User doesn't exists");
+  }
 
   if (!user) {
-    throw new AppError(400, "User doesn't exists");
+    throw new AppError(400, "User not found");
   }
 
   const newContact = contactRepository.create({
     email,
-    name: user.name,
-    phoneNumber: user.phoneNumber,
+    name: contact.name,
+    phoneNumber: contact.phoneNumber,
   });
 
-  await contactRepository.save(newContact);
+  await contactRepository.save({ ...newContact, user });
 
   return newContact;
 };

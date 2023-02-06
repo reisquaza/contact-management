@@ -3,11 +3,14 @@ import { iContactRequest } from "../../interfaces/contacts.interface";
 import createContactService from "../../services/contacts/createContact.service";
 
 const createContactController = async (req: Request, res: Response) => {
-  const email: iContactRequest = req.body;
+  const data: iContactRequest = req.body;
+  const userId = req.user.id;
 
-  const newContact = await createContactService(email);
+  data.userId = userId;
 
-  return res.status(201).json({ newContact });
+  const newContact = await createContactService(data);
+
+  return res.status(201).json(newContact);
 };
 
 export default createContactController;

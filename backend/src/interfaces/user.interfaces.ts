@@ -16,3 +16,10 @@ export interface iUserLogin {
   email: string;
   password: string;
 }
+
+export interface iUserUpdate {
+  name?: string;
+  email?: string;
+  password?: string;
+  phoneNumber?: string;
+}

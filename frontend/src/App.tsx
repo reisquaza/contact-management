@@ -1,7 +1,11 @@
-import "./App.css";
+import RoutesMain from "./routes";
 
-function App() {
-  return <></>;
-}
+const App = () => {
+  return (
+    <div>
+      <RoutesMain />
+    </div>
+  );
+};
 
 export default App;

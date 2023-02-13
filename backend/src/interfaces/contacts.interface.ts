@@ -10,3 +10,9 @@ export interface iContact {
   phoneNumber: string;
   createdAt: Date;
 }
+
+export interface iContactUpdate {
+  name?: string;
+  email?: string;
+  phoneNumber?: string;
+}
